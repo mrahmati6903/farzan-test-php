@@ -10,7 +10,7 @@ class MotorbikeController
 
     public function __construct()
     {
-        $this->db = (new DB())->setTable('companies');
+        $this->db = new DB();
     }
     public function create()
     {
@@ -21,7 +21,7 @@ class MotorbikeController
     {
         try {
             $_POST['created_at'] = date('Y-m-d H:i:s');
-            $this->db->setTable('motorbikes')->insert($_POST);
+            $this->db->insert('motorbikes', $_POST);
             echo "store new motorbike success";
         } catch (\Exception $e) {
             die($e->getMessage());
@@ -32,13 +32,13 @@ class MotorbikeController
     {
         $page = $_GET['page'] ?? 1;
 
-        $motors = $this->db->setTable('motorbikes')->getAll($page);
+        $motors = $this->db->getAll('motorbikes', $page);
         include_once BASE_MOTORBIKE_DIR_PATH . DIRECTORY_SEPARATOR . 'partials' . DIRECTORY_SEPARATOR . 'list-motorbike.phtml';
     }
 
     public function show()
     {
-        $motor = $this->db->setTable('motorbikes')->getById($_GET['id']);
+        $motor = $this->db->getById('motorbikes', $_GET['id']);
         include_once BASE_MOTORBIKE_DIR_PATH . DIRECTORY_SEPARATOR . 'partials' . DIRECTORY_SEPARATOR . 'show-motorbike.phtml';
     }
 }

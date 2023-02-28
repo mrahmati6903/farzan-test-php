@@ -7,11 +7,11 @@ use PDOException;
 
 class DB
 {
-    protected $host     = '127.0.0.1';
-    protected $db       = 'motorbike_php_db';
-    protected $username = 'root';
-    protected $password = '';
-    protected $charset  = 'UTF8';
+    protected $host     = DB_HOST;
+    protected $db       = DB_NAME;
+    protected $username = DB_USERNAME;
+    protected $password = DB_PASSWORD;
+    protected $charset  = DB_CHARSET;
 
     protected $connection = null;
 
@@ -34,13 +34,7 @@ class DB
         return $this->connection;
     }
 
-    public function setTable($table)
-    {
-        $this->table = $table;
-        return $this;
-    }
-
-    public function insert($data)
+    public function insert($table, $data)
     {
         $params = [];
         $params2 = [];
@@ -54,21 +48,21 @@ class DB
         return $this->getConnection()->prepare($query)->execute($data);
     }
 
-    public function getAll($page = 1, $limit = 2)
+    public function getAll($table, $page = 1, $limit = 2)
     {
-        $total = $this->getConnection()->query("SELECT COUNT(*) AS count FROM $this->table")->fetch()['count'];
+        $total = $this->getConnection()->query("SELECT COUNT(*) AS count FROM $table")->fetch()['count'];
         $offset = ($page-1) * $limit;
 
         return [
             'total'        => $total,
             'current_page' => $page,
             'limit'        => $limit,
-            'rows'         => $this->getConnection()->query("SELECT * FROM $this->table LIMIT $offset,$limit")->fetchAll(PDO::FETCH_ASSOC)
+            'rows'         => $this->getConnection()->query("SELECT * FROM $table LIMIT $offset,$limit")->fetchAll(PDO::FETCH_ASSOC)
         ];
     }
 
-    public function getById($id)
+    public function getById($table, $id)
     {
-        return $this->getConnection()->query("SELECT * FROM $this->table WHERE id = $id")->fetch(PDO::FETCH_ASSOC);
+        return $this->getConnection()->query("SELECT * FROM $table WHERE id = $id")->fetch(PDO::FETCH_ASSOC);
     }
 }

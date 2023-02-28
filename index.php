@@ -2,6 +2,11 @@
 
 define('BASE_MOTORBIKE_DIR_PATH', __DIR__);
 define('BASE_MOTORBIKE_NAMESPACE', 'Includes');
+define('DB_HOST', '127.0.0.1');
+define('DB_NAME', 'motorbike_php_db');
+define('DB_USERNAME', 'root');
+define('DB_PASSWORD', '');
+define('DB_CHARSET', 'UTF8');
 
 function dd($arg) {
     echo '<pre>';
