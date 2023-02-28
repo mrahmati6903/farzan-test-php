@@ -1,0 +1,22 @@
+<html>
+<head>
+    <title>motorbike - motorbikes list</title>
+</head>
+<body>
+<div>
+    <h2>motorbikes list</h2>
+    <?php
+        $pages = $motors['total'] / $motors['limit'];
+        for ($i = 1; $i <= $pages; $i++) {
+            echo "<a href='/motorbike/list?page=" . $i . "'>" . $i . "</a>&nbsp | &nbsp";
+        }
+    ?>
+
+    <?php foreach ($motors['rows'] as $motor): ?>
+        <div>
+            <b><?= $motor['name'] ?></b>
+        </div>
+    <?php endforeach; ?>
+</div>
+</body>
+</html>

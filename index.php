@@ -3,6 +3,13 @@
 define('BASE_MOTORBIKE_DIR_PATH', __DIR__);
 define('BASE_MOTORBIKE_NAMESPACE', 'Includes');
 
+function dd($arg) {
+    echo '<pre>';
+    var_dump($arg);
+    echo '<pre>';
+    die;
+}
+
 spl_autoload_register(function ($class) {
     if (0 !== strpos($class, BASE_MOTORBIKE_NAMESPACE)) {
         return;
@@ -17,12 +24,14 @@ spl_autoload_register(function ($class) {
 
 $routes = [
     ['/motorbike/create', 'GET', \Includes\Controllers\MotorbikeController::class, 'create'],
-    ['/motorbike/store', 'POST', \Includes\Controllers\MotorbikeController::class, 'store']
+    ['/motorbike/store', 'POST', \Includes\Controllers\MotorbikeController::class, 'store'],
+    ['/motorbike/list', 'GET', \Includes\Controllers\MotorbikeController::class, 'list'],
 ];
 
+$parsedUri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 foreach ($routes as $route) {
     if (
-        $_SERVER['REQUEST_URI'] === $route[0]
+        $parsedUri === $route[0]
         &&
         $_SERVER['REQUEST_METHOD'] === $route[1]
     ) {

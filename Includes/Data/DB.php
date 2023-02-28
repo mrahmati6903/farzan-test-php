@@ -54,10 +54,17 @@ class DB
         return $this->getConnection()->prepare($query)->execute($data);
     }
 
-    public function getAll()
+    public function getAll($page = 1, $limit = 2)
     {
-        // TODO: implement pagination
-        return $this->getConnection()->query("SELECT * FROM $this->table")->fetchAll(PDO::FETCH_ASSOC);
+        $total = $this->getConnection()->query("SELECT COUNT(*) AS count FROM $this->table")->fetch()['count'];
+        $offset = ($page-1) * $limit;
+
+        return [
+            'total'        => $total,
+            'current_page' => $page,
+            'limit'        => $limit,
+            'rows'         => $this->getConnection()->query("SELECT * FROM $this->table LIMIT $offset,$limit")->fetchAll(PDO::FETCH_ASSOC)
+        ];
     }
 
     public function getById($id)

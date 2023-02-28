@@ -27,4 +27,12 @@ class MotorbikeController
             die($e->getMessage());
         }
     }
+
+    public function list()
+    {
+        $page = $_GET['page'] ?? 1;
+
+        $motors = $this->db->setTable('motorbikes')->getAll($page);
+        include_once BASE_MOTORBIKE_DIR_PATH . DIRECTORY_SEPARATOR . 'partials' . DIRECTORY_SEPARATOR . 'list-motorbike.phtml';
+    }
 }
