@@ -7,17 +7,6 @@
     <h2>create new motorbike</h2>
     <form id="form-create-motorbike" method="post" action="/motorbike/store">
         <p>
-            <label for="select-company">company</label>
-            <br>
-            <select name="company_id">
-                <?php foreach ($companies as $company): ?>
-                    <option value="<?= $company['id'] ?>">
-                        <?= $company['name'] ?>
-                    </option>
-                <?php endforeach; ?>
-            </select>
-        </p>
-        <p>
             <label for="text-name">name</label>
             <br>
             <input id="text-name" type="text" name="name">
@@ -28,9 +17,15 @@
             <input id="text-model" type="text" name="model">
         </p>
         <p>
-            <label for="text-color">color</label>
+            <label for="select-color">color</label>
             <br>
-            <input id="text-color" type="text" name="color">
+            <select id="select-color" name="color">
+                <option>red</option>
+                <option>blue</option>
+                <option>green</option>
+                <option>black</option>
+                <option>gray</option>
+            </select>
         </p>
         <p>
             <label for="number-weight">weight</label>

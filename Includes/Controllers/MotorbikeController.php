@@ -14,13 +14,13 @@ class MotorbikeController
     }
     public function create()
     {
-        $companies = $this->db->getAll();
         include_once BASE_MOTORBIKE_DIR_PATH . DIRECTORY_SEPARATOR . 'partials' . DIRECTORY_SEPARATOR . 'create-motorbike.phtml';
     }
 
     public function store()
     {
         try {
+            $_POST['created_at'] = date('Y-m-d H:i:s');
             $this->db->setTable('motorbikes')->insert($_POST);
             echo "store new motorbike success";
         } catch (\Exception $e) {
