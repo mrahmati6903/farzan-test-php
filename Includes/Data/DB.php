@@ -40,8 +40,17 @@ class DB
         return $this;
     }
 
-    public function insert($query, $data)
+    public function insert($data)
     {
+        $params = [];
+        $params2 = [];
+        foreach ($data as $key => $value) {
+            $params[] = $key;
+            $params2[] = ':' . $key;
+        }
+        $params = implode(', ', $params);
+        $params2 = implode(', ', $params2);
+        $query = "INSERT INTO $this->table ($params) VALUES ($params2)";
         return $this->getConnection()->prepare($query)->execute($data);
     }
 

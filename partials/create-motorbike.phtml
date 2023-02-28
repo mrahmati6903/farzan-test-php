@@ -9,7 +9,7 @@
         <p>
             <label for="select-company">company</label>
             <br>
-            <select>
+            <select name="company_id">
                 <?php foreach ($companies as $company): ?>
                     <option value="<?= $company['id'] ?>">
                         <?= $company['name'] ?>
@@ -45,7 +45,7 @@
         <p>
             <label for="text-image">image</label>
             <br>
-            <input id="text-image" type="file" name="imge">
+            <input id="text-image" type="file" name="image">
         </p>
         <p>
             <label for="text-description">description</label>

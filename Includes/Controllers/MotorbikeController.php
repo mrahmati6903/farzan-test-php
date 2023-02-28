@@ -17,4 +17,14 @@ class MotorbikeController
         $companies = $this->db->getAll();
         include_once BASE_MOTORBIKE_DIR_PATH . DIRECTORY_SEPARATOR . 'partials' . DIRECTORY_SEPARATOR . 'create-motorbike.phtml';
     }
+
+    public function store()
+    {
+        try {
+            $this->db->setTable('motorbikes')->insert($_POST);
+            echo "store new motorbike success";
+        } catch (\Exception $e) {
+            die($e->getMessage());
+        }
+    }
 }

@@ -16,7 +16,8 @@ spl_autoload_register(function ($class) {
 });
 
 $routes = [
-    ['/motorbike/create', 'GET', \Includes\Controllers\MotorbikeController::class, 'create']
+    ['/motorbike/create', 'GET', \Includes\Controllers\MotorbikeController::class, 'create'],
+    ['/motorbike/store', 'POST', \Includes\Controllers\MotorbikeController::class, 'store']
 ];
 
 foreach ($routes as $route) {
