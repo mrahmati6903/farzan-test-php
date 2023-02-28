@@ -2,17 +2,13 @@
 
 namespace Includes\Controllers;
 
+use Includes\Data\DB;
+
 class MotorbikeController
 {
     public function create()
     {
-        $companies = [
-            ['id' => 1, 'name' => 'yamaha', 'website' => ''],
-            ['id' => 2, 'name' => 'suzuki', 'website' => ''],
-            ['id' => 3, 'name' => 'bentli', 'website' => ''],
-            ['id' => 4, 'name' => 'honda' , 'website' => ''],
-        ];
-
+        $companies = (new DB())->setTable('companies')->getAll();
         include_once BASE_MOTORBIKE_DIR_PATH . DIRECTORY_SEPARATOR . 'partials' . DIRECTORY_SEPARATOR . 'create-motorbike.phtml';
     }
 }

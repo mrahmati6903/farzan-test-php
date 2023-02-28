@@ -34,6 +34,12 @@ class DB
         return $this->connection;
     }
 
+    public function setTable($table)
+    {
+        $this->table = $table;
+        return $this;
+    }
+
     protected function insert($query, $data)
     {
         return $this->getConnection()->prepare($query)->execute($data);
