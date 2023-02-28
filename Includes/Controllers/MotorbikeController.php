@@ -6,9 +6,15 @@ use Includes\Data\DB;
 
 class MotorbikeController
 {
+    protected $db;
+
+    public function __construct()
+    {
+        $this->db = (new DB())->setTable('companies');
+    }
     public function create()
     {
-        $companies = (new DB())->setTable('companies')->getAll();
+        $companies = $this->db->getAll();
         include_once BASE_MOTORBIKE_DIR_PATH . DIRECTORY_SEPARATOR . 'partials' . DIRECTORY_SEPARATOR . 'create-motorbike.phtml';
     }
 }

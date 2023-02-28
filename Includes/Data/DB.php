@@ -40,7 +40,7 @@ class DB
         return $this;
     }
 
-    protected function insert($query, $data)
+    public function insert($query, $data)
     {
         return $this->getConnection()->prepare($query)->execute($data);
     }
