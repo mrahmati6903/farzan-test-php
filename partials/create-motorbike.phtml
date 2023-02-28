@@ -1,0 +1,62 @@
+<html>
+<head>
+    <title>motorbike - create new</title>
+</head>
+<body>
+<div>
+    <h2>create new motorbike</h2>
+    <form id="form-create-motorbike" method="post" action="/motorbike/store">
+        <p>
+            <label for="select-company">company</label>
+            <br>
+            <select>
+                <?php foreach ($companies as $company): ?>
+                    <option value="<?= $company['id'] ?>">
+                        <?= $company['name'] ?>
+                    </option>
+                <?php endforeach; ?>
+            </select>
+        </p>
+        <p>
+            <label for="text-name">name</label>
+            <br>
+            <input id="text-name" type="text" name="name">
+        </p>
+        <p>
+            <label for="text-model">model</label>
+            <br>
+            <input id="text-model" type="text" name="model">
+        </p>
+        <p>
+            <label for="text-color">color</label>
+            <br>
+            <input id="text-color" type="text" name="color">
+        </p>
+        <p>
+            <label for="number-weight">weight</label>
+            <br>
+            <input id="number-weight" type="number" name="weight">
+        </p>
+        <p>
+            <label for="number-price">price</label>
+            <br>
+            <input id="number-price" type="number" name="price">
+        </p>
+        <p>
+            <label for="text-image">image</label>
+            <br>
+            <input id="text-image" type="file" name="imge">
+        </p>
+        <p>
+            <label for="text-description">description</label>
+            <br>
+            <textarea id="text-description" name="description"></textarea>
+        </p>
+        <p>
+            <button type="submit">create</button>
+            <button type="reset">reset</button>
+        </p>
+    </form>
+</div>
+</body>
+</html>
