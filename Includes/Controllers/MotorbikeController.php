@@ -35,4 +35,10 @@ class MotorbikeController
         $motors = $this->db->setTable('motorbikes')->getAll($page);
         include_once BASE_MOTORBIKE_DIR_PATH . DIRECTORY_SEPARATOR . 'partials' . DIRECTORY_SEPARATOR . 'list-motorbike.phtml';
     }
+
+    public function show()
+    {
+        $motor = $this->db->setTable('motorbikes')->getById($_GET['id']);
+        include_once BASE_MOTORBIKE_DIR_PATH . DIRECTORY_SEPARATOR . 'partials' . DIRECTORY_SEPARATOR . 'show-motorbike.phtml';
+    }
 }

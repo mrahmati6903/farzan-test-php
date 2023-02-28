@@ -26,6 +26,7 @@ $routes = [
     ['/motorbike/create', 'GET', \Includes\Controllers\MotorbikeController::class, 'create'],
     ['/motorbike/store', 'POST', \Includes\Controllers\MotorbikeController::class, 'store'],
     ['/motorbike/list', 'GET', \Includes\Controllers\MotorbikeController::class, 'list'],
+    ['/motorbike/show', 'GET', \Includes\Controllers\MotorbikeController::class, 'show'],
 ];
 
 $parsedUri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
