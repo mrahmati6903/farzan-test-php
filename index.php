@@ -1,5 +1,6 @@
 <?php
 
+// project configurations
 define('BASE_MOTORBIKE_DIR_PATH', __DIR__);
 define('BASE_MOTORBIKE_NAMESPACE', 'Includes');
 define('DB_HOST', '127.0.0.1');
@@ -15,6 +16,7 @@ function dd($arg) {
     die;
 }
 
+// register class autoloader
 spl_autoload_register(function ($class) {
     if (0 !== strpos($class, BASE_MOTORBIKE_NAMESPACE)) {
         return;
@@ -27,6 +29,7 @@ spl_autoload_register(function ($class) {
     }
 });
 
+// project routes
 $routes = [
     ['/motorbike/create', 'GET', \Includes\Controllers\MotorbikeController::class, 'create'],
     ['/motorbike/store', 'POST', \Includes\Controllers\MotorbikeController::class, 'store'],
@@ -34,6 +37,7 @@ $routes = [
     ['/motorbike/show', 'GET', \Includes\Controllers\MotorbikeController::class, 'show'],
 ];
 
+// run controller action based on route
 $parsedUri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 foreach ($routes as $route) {
     if (

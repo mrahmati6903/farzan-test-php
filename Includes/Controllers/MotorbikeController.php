@@ -3,6 +3,7 @@
 namespace Includes\Controllers;
 
 use Includes\Data\DB;
+use Includes\Helpers;
 
 class MotorbikeController
 {
@@ -14,7 +15,7 @@ class MotorbikeController
     }
     public function create()
     {
-        include_once BASE_MOTORBIKE_DIR_PATH . DIRECTORY_SEPARATOR . 'partials' . DIRECTORY_SEPARATOR . 'create-motorbike.phtml';
+        Helpers::renderPartial('create-motorbike.phtml');
     }
 
     public function store()
@@ -37,12 +38,12 @@ class MotorbikeController
         $filters = $_GET['filters'] ?? [];
 
         $motors = $this->db->getAll('motorbikes', $page, $limit, $sortBy, $sortType, $filters);
-        include_once BASE_MOTORBIKE_DIR_PATH . DIRECTORY_SEPARATOR . 'partials' . DIRECTORY_SEPARATOR . 'list-motorbike.phtml';
+        Helpers::renderPartial('list-motorbike.phtml', ['motors' => $motors]);
     }
 
     public function show()
     {
         $motor = $this->db->getById('motorbikes', $_GET['id']);
-        include_once BASE_MOTORBIKE_DIR_PATH . DIRECTORY_SEPARATOR . 'partials' . DIRECTORY_SEPARATOR . 'show-motorbike.phtml';
+        Helpers::renderPartial('show-motorbike.phtml', ['motor' => $motor]);
     }
 }

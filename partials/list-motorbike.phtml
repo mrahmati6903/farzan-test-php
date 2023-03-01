@@ -6,13 +6,13 @@
 <div>
     <h2>motorbikes list</h2>
     <?php
-        $pages = $motors['total'] / $motors['limit'];
+        $pages = $data['motors']['total'] / $data['motors']['limit'];
         for ($i = 1; $i <= $pages; $i++) {
             echo "<a href='/motorbike/list?page=" . $i . "'>" . $i . "</a>&nbsp | &nbsp";
         }
     ?>
 
-    <?php foreach ($motors['rows'] as $motor): ?>
+    <?php foreach ($data['motors']['rows'] as $motor): ?>
         <div>
             <a href="/motorbike/show?id=<?= $motor['id'] ?>">
                 <?= $motor['name'] ?>
