@@ -48,16 +48,27 @@ class DB
         return $this->getConnection()->prepare($query)->execute($data);
     }
 
-    public function getAll($table, $page = 1, $limit = 2, $sortBy, $sortType)
+    public function getAll($table, $page = 1, $limit = 2, $sortBy, $sortType, $filters = [])
     {
-        $total = $this->getConnection()->query("SELECT COUNT(*) AS count FROM $table")->fetch()['count'];
+        $where = [];
+
+        foreach ($filters as $key => $value) {
+            $where[] = "`$key` = '$value'";
+        }
+        if (!empty($where)) {
+            $where = 'WHERE ' . implode(' AND ', $where);
+        } else {
+            $where = '';
+        }
+
+        $total = $this->getConnection()->query("SELECT COUNT(*) AS count FROM $table $where")->fetch()['count'];
         $offset = ($page-1) * $limit;
 
         return [
             'total'        => $total,
             'current_page' => $page,
             'limit'        => $limit,
-            'rows'         => $this->getConnection()->query("SELECT * FROM $table ORDER BY $sortBy $sortType LIMIT $offset,$limit")->fetchAll(PDO::FETCH_ASSOC)
+            'rows'         => $this->getConnection()->query("SELECT * FROM $table $where ORDER BY $sortBy $sortType LIMIT $offset,$limit")->fetchAll(PDO::FETCH_ASSOC)
         ];
     }
 

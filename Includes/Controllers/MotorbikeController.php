@@ -34,8 +34,9 @@ class MotorbikeController
         $limit = $_GET['limit'] ?? 5;
         $sortBy = $_GET['sort_by'] ?? 'created_at';
         $sortType = $_GET['sort_type'] ?? 'ASC';
+        $filters = $_GET['filters'] ?? [];
 
-        $motors = $this->db->getAll('motorbikes', $page, $limit, $sortBy, $sortType);
+        $motors = $this->db->getAll('motorbikes', $page, $limit, $sortBy, $sortType, $filters);
         include_once BASE_MOTORBIKE_DIR_PATH . DIRECTORY_SEPARATOR . 'partials' . DIRECTORY_SEPARATOR . 'list-motorbike.phtml';
     }
 
