@@ -2,6 +2,7 @@
 
 namespace Includes\Data;
 
+use Includes\Helpers;
 use PDO;
 use PDOException;
 
@@ -44,7 +45,7 @@ class DB
         }
         $params = implode(', ', $params);
         $params2 = implode(', ', $params2);
-        $query = "INSERT INTO $this->table ($params) VALUES ($params2)";
+        $query = "INSERT INTO $table ($params) VALUES ($params2)";
         return $this->getConnection()->prepare($query)->execute($data);
     }
 

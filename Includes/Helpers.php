@@ -16,4 +16,10 @@ class Helpers
     {
         include_once BASE_MOTORBIKE_DIR_PATH . DIRECTORY_SEPARATOR . 'partials' . DIRECTORY_SEPARATOR . $partial;
     }
+
+    public static function redirect($address)
+    {
+        header('Location: ' . $address);
+        die();
+    }
 }

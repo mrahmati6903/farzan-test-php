@@ -23,7 +23,7 @@ class MotorbikeController
         try {
             $_POST['created_at'] = date('Y-m-d H:i:s');
             $this->db->insert('motorbikes', $_POST);
-            echo "store new motorbike success";
+            Helpers::redirect('/motorbike/list');
         } catch (\Exception $e) {
             die($e->getMessage());
         }
