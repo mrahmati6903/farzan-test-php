@@ -48,7 +48,7 @@ class DB
         return $this->getConnection()->prepare($query)->execute($data);
     }
 
-    public function getAll($table, $page = 1, $limit = 2)
+    public function getAll($table, $page = 1, $limit = 2, $sortBy, $sortType)
     {
         $total = $this->getConnection()->query("SELECT COUNT(*) AS count FROM $table")->fetch()['count'];
         $offset = ($page-1) * $limit;
@@ -57,7 +57,7 @@ class DB
             'total'        => $total,
             'current_page' => $page,
             'limit'        => $limit,
-            'rows'         => $this->getConnection()->query("SELECT * FROM $table LIMIT $offset,$limit")->fetchAll(PDO::FETCH_ASSOC)
+            'rows'         => $this->getConnection()->query("SELECT * FROM $table ORDER BY $sortBy $sortType LIMIT $offset,$limit")->fetchAll(PDO::FETCH_ASSOC)
         ];
     }
 
