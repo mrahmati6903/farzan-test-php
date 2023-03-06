@@ -31,11 +31,11 @@ class MotorbikeController
 
     public function list()
     {
-        $page = $_GET['page'] ?? 1;
-        $limit = $_GET['limit'] ?? 5;
-        $sortBy = $_GET['sort_by'] ?? 'created_at';
-        $sortType = $_GET['sort_type'] ?? 'ASC';
-        $filters = $_GET['filters'] ?? [];
+        $page     = $_GET['page']      ?? 1;
+        $limit    = $_GET['limit']     ?? 5;
+        $sortBy   = $_GET['sort_by']   ?? 'created_at';
+        $sortType = $_GET['sort_type'] ?? 'DESC';
+        $filters  = $_GET['filters']   ?? [];
 
         $motors = $this->db->getAll('motorbikes', $page, $limit, $sortBy, $sortType, $filters);
         Helpers::renderPartial('list-motorbike.phtml', ['motors' => $motors]);

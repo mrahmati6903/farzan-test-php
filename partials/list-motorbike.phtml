@@ -5,20 +5,50 @@
 <body>
 <div>
     <h2>motorbikes list</h2>
-    <?php
-        $pages = $data['motors']['total'] / $data['motors']['limit'];
-        for ($i = 1; $i <= $pages; $i++) {
-            echo "<a href='/motorbike/list?page=" . $i . "'>" . $i . "</a>&nbsp | &nbsp";
-        }
-    ?>
 
-    <?php foreach ($data['motors']['rows'] as $motor): ?>
-        <div>
-            <a href="/motorbike/show?id=<?= $motor['id'] ?>">
-                <?= $motor['name'] ?>
-            </a>
-        </div>
-    <?php endforeach; ?>
+    <div>
+        <table>
+            <thead>
+                <tr>
+                    <th>name</th>
+                    <th>model</th>
+                    <th>color</th>
+                    <th>weight</th>
+                    <th>price</th>
+                </tr>
+            </thead>
+            <tbody>
+            <?php foreach ($data['motors']['rows'] as $motor): ?>
+                <tr>
+                    <td>
+                        <a href="/motorbike/show?id=<?= $motor['id'] ?>">
+                            <?= $motor['name'] ?>
+                        </a>
+                    </td>
+                    <td><?= $motor['model'] ?></td>
+                    <td><?= $motor['color'] ?></td>
+                    <td><?= $motor['weight'] ?></td>
+                    <td><?= $motor['price'] ?></td>
+                </tr>
+            <?php endforeach; ?>
+            </tbody>
+        </table>
+    </div>
+
+
+    <?php if ($data['motors']['total'] > $data['motors']['limit']): ?>
+    <ul>
+        <?php
+//        $pages = $data['motors']['total'] / $data['motors']['limit'];
+        $pages = ($data['motors']['total'] + $data['motors']['limit'] - 1) / $data['motors']['limit'];
+        for ($i = 1; $i <= $pages; $i++):
+        ?>
+        <li>
+            <a href="/motorbike/list?page=<?= $i ?>">page <?= $i ?></a>;
+        </li>
+        <?php endfor; ?>
+    </ul>
+    <?php endif; ?>
 </div>
 </body>
 </html>

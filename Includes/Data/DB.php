@@ -49,7 +49,7 @@ class DB
         return $this->getConnection()->prepare($query)->execute($data);
     }
 
-    public function getAll($table, $page = 1, $limit = 2, $sortBy, $sortType, $filters = [])
+    public function getAll($table, $page = 1, $limit = 5, $sortBy, $sortType, $filters = [])
     {
         $where = [];
 
@@ -59,17 +59,18 @@ class DB
         if (!empty($where)) {
             $where = 'WHERE ' . implode(' AND ', $where);
         } else {
-            $where = '';
+            $where = 'WHERE 1 = 1';
         }
 
         $total = $this->getConnection()->query("SELECT COUNT(*) AS count FROM $table $where")->fetch()['count'];
-        $offset = ($page-1) * $limit;
+        $offset = ($page - 1) * $limit;
 
+        $query = sprintf("SELECT * FROM `%s` %s ORDER BY `%s` %s LIMIT %d,%d", $table, $where, $sortBy, $sortType, $offset, $limit);
         return [
             'total'        => $total,
             'current_page' => $page,
             'limit'        => $limit,
-            'rows'         => $this->getConnection()->query("SELECT * FROM $table $where ORDER BY $sortBy $sortType LIMIT $offset,$limit")->fetchAll(PDO::FETCH_ASSOC)
+            'rows'         => $this->getConnection()->query($query)->fetchAll(PDO::FETCH_ASSOC)
         ];
     }
 
