@@ -9,13 +9,6 @@ define('DB_USERNAME', 'root');
 define('DB_PASSWORD', '');
 define('DB_CHARSET', 'UTF8');
 
-function dd($arg) {
-    echo '<pre>';
-    var_dump($arg);
-    echo '<pre>';
-    die;
-}
-
 // register class autoloader
 spl_autoload_register(function ($class) {
     if (0 !== strpos($class, BASE_MOTORBIKE_NAMESPACE)) {
