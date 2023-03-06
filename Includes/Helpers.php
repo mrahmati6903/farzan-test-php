@@ -22,4 +22,9 @@ class Helpers
         header('Location: ' . $address);
         die();
     }
+
+    public function pagination($total, $limit, $page)
+    {
+        //
+    }
 }
